@@ -1,0 +1,26 @@
+https://leetcode.com/problems/linked-list-cycle/
+
+If there is a cycle in LL return true else false
+cycle  ---> if the end doesn't point to null but to some element in the linkedlist again.
+
+Approach:   (2 pointer approach)
+1.If the fast pointer next refers to the slow pointer value somewhere it means there is a cycle.
+
+
+Solution:
+
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode fast=head,slow=head;
+        if(head==null || head.next==null) return false;
+        while(slow!=null){
+            if(fast.next==slow){
+                return true;
+            }
+            if(fast.next==null || fast.next.next==null) return false;
+            fast=fast.next.next;      //Incrementing fast pointer by 2
+            slow=slow.next;           //Incrementing slow pointer by 1
+        }
+        return false;
+    }
+}
