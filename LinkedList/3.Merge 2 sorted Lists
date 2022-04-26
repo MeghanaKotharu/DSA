@@ -12,7 +12,8 @@ o/p:  1->1->2->3->4->4
 
 Approach:
 1.Take a new List(res) and add elements into it.
-2.if list1 has smaller element then first add it to res and move list1 to next position.
+2.Iterate till both list1 and 2  not reached the end 
+      if list1 has smaller element then first add it to res and move list1 to next position.
 3.vice versa of 2nd point
 4.Create a new empty node for res each time and move position to new empty node
 5.If list1 still has some elements but list2 was ended add all list1 elements to the res and vice versa.
