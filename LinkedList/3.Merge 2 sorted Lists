@@ -1,0 +1,64 @@
+https://leetcode.com/problems/merge-two-sorted-lists/
+
+You are given the heads of two sorted linked lists list1 and list2.
+Merge the two lists in a one sorted list. The list should be made by splicing 
+                 together the nodes of the first two lists.
+Return the head of the merged linked list.
+
+ex:   1->2->4
+      1->3->4
+o/p:  1->1->2->3->4->4
+
+
+Approach:
+1.Take a new List(res) and add elements into it.
+2.if list1 has smaller element then first add it to res and move list1 to next position.
+3.vice versa of 2nd point
+4.Create a new empty node for res each time and move position to new empty node
+5.If list1 still has some elements but list2 was ended add all list1 elements to the res and vice versa.
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if(list1==null) return list2;
+        if(list2==null) return list1;
+        
+        ListNode res=new ListNode();       //creates an empty node
+        ListNode head=res;                 //refers to a node
+        
+        while(list1!=null && list2!=null){            
+            if(list1.val<=list2.val){
+                res.val=list1.val;
+                list1=list1.next; 
+            }
+            else{         
+                res.val=list2.val;
+                list2=list2.next;
+            }
+            res.next=new ListNode();          //creates new empty node to res
+            res=res.next;                     //moves res to new node
+        }
+
+        if(list1!=null){
+            res.val=list1.val;
+            res.next=list1.next;
+        }
+        if(list2!=null){
+            res.val=list2.val;
+            res.next=list2.next;
+        }
+        
+        return head;
+    }
+}
