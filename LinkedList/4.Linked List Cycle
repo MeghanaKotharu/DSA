@@ -3,6 +3,10 @@ https://leetcode.com/problems/linked-list-cycle/
 If there is a cycle in LL return true else false
 cycle  ---> if the end doesn't point to null but to some element in the linkedlist again.
 
+ex: [3,2,0,-4]  pos=1   o/p: True
+ the last node -4 is again pointing to the node 2 at pos 1(indexing starts from 0).
+Note: pos wont be given to us.
+
 Approach:   (2 pointer approach)
 1.If the fast pointer next refers to the slow pointer value somewhere it means there is a cycle.
 
