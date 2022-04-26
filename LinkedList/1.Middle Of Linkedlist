@@ -1,0 +1,31 @@
+https://leetcode.com/problems/middle-of-the-linked-list/
+
+Given the head of a singly linked list, return the middle node of the linked list.
+If there are two middle nodes, return the second middle node.
+ex1:  1->2->3->4->5       o/p: 3->4->5
+ex2: 1->2->3->4->5->6    o/p:4->5->6
+
+
+Approach: 
+1. Using a temp variable count(k) the no of elements in ll.
+2. Intialize temp to head again for re-use and count=k/2 
+     Move the temp till count>0
+ It will automatically be moved to the second middle incase of even
+
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode temp=head;
+        int k=0;
+        while(temp!=null){
+            k++;
+            temp=temp.next;
+        }
+        temp=head;
+        int count =k/2;
+        while(count >0){
+            temp=temp.next;
+            count--;
+        }
+        return temp;
+    }
+}
