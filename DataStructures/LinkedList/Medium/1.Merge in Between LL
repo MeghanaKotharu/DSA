@@ -1,0 +1,53 @@
+https://leetcode.com/problems/merge-in-between-linked-lists/
+
+You are given two linked lists: list1 and list2 of sizes n and m respectively.
+  Remove list1's nodes from the ath node to the bth node, and put list2 in their place.
+  
+Note: Here a and b are indexes starting from 0.
+ 
+ ex: list1:   0->1->2->3->4->5
+     list2:    10->11->12->13 
+     a=2 ,b=5
+o/p: 0->1->10->11->12->13->5 
+
+
+Approach:
+1.Move the curr variable till the index-1 is reached store that bez we need to link it to the the list2.
+2.Again continue moving the curr variable until all the elements within the range b are gone.
+3.Now add the list2 elements to curr's next  
+    this step can also be done immediately after step2.
+4.Traverse till the end of the list2 and add remaining list1 elements at the end of 
+    list2 which were obtained at step2
+
+
+Solution:
+class Solution {
+    public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
+        ListNode curr=list1,temp=list2,t;
+        int count=0;
+        
+        //step1
+        while(list1!=null && (count+1)!=a){
+            curr=curr.next;
+            count++;
+        }
+        t=curr;
+        
+        //step2
+        while(t!=null && count!=b){
+            t=t.next;
+            count++;
+        }
+        t=t.next;
+        
+        //step3
+        curr.next=list2;
+        
+        //step4
+        while(temp.next!=null){
+            temp=temp.next;
+        }
+        temp.next=t;
+        return list1;
+    }
+}
