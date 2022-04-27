@@ -1,0 +1,35 @@
+https://leetcode.com/problems/reverse-linked-list/
+
+Given the head of a singly linked list, reverse the list, and return the reversed list.
+ex:    1->2->3->4->5->6
+o/p:   6->5->4->3->2->1
+
+
+Approach:
+1.Solve one node at a time ie. change the refernce of one node to previous and keep on doing it
+2.Let's solve by this example:
+            1->2->3->4       curr=1,    prev=null,   temp=store curr.next value as we change the refernce of curr to prev next values shouldn't be lost so store them (2->3->4)
+       Now change reference of 1 to prev
+            null<-1   temp=2->3->4     curr=1
+       Now we have changed the curr element so it's time to update the next one so move curr to temp (2->3->4)
+            curr=temp (2->3->4)
+3.Repeat this process until curr reaches end
+
+
+Solution:
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode temp,curr=head,prev=null;
+        
+        if(head==null || head.next==null)return head;
+        
+        while(curr!=null){
+            temp=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=temp;
+        }
+        head=prev;
+        return head;
+    }
+}
