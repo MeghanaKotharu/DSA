@@ -1,0 +1,63 @@
+https://leetcode.com/problems/intersection-of-two-linked-lists/
+
+Given the heads of two singly linked-lists headA and headB, return the node at which 
+the two lists intersect.If the two linked lists have no intersection at all, return null
+
+Note:The original structure of LL shouldn't be changed.
+
+
+Approach:
+1.First count the no of elements in the list1 and list2
+2.Check which list id larger and move the pointer temp till both lists are of equal size
+3.Now iterate over the list starting from temp variables of both lists and find where both 
+       the nodes are same and return it.
+       
+Note:  Here we could simply move the head pointer forward instead of temp but we didn't bez in qn it is 
+mentioned that the structue of LL shouldn't be disturbed.
+
+
+Solution:
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int count1=0,count2=0;
+        ListNode temp1=headA,temp2=headB;
+        
+        //count no of elements in list1
+        while(temp1!=null){
+            count1++;
+            temp1=temp1.next;
+        }
+        
+        //count no of elements in list2
+        while(temp2!=null){
+            count2++;
+            temp2=temp2.next;
+        }
+        
+        //intialising temps to head node again for re-use.
+        temp1=headA;
+        temp2=headB;
+        
+        //if list1 is bigger than list2 move temp to forward until both lists has equal length.
+        while(count1>count2){
+            temp1=temp1.next;
+            count1--;   
+        }
+        
+        //if list2 is bigger than list1 move temp to forward until both lists has equal length.
+        while(count1<count2){
+            temp2=temp2.next;
+            count2--;
+        }
+        
+        //check whether both are referring to same element or not.
+        while(temp1!=null && temp2!=null){
+         /*Here we shouldn't give t1.val==t2.val bez the 2 lists may have same nodes 
+                 but they may not be intersection point*/
+            if(temp1==temp2) return temp1;
+            temp1=temp1.next;
+            temp2=temp2.next;
+        }
+        return null;
+    }
+}
