@@ -1,0 +1,52 @@
+https://leetcode.com/problems/backspace-string-compare/
+
+Given two strings s and t, return true if they are equal when both are typed into empty text editors. 
+         '#' means a backspace character.
+Note that after backspacing an empty text, the text will continue empty.
+
+ex1:  s = "ab#c", t = "ad#c"      o/p: true 
+      Both s and t becomes "ac"
+ex2:  s = "ab##", t = "c#d#"      o/p:true
+      Both s and t becomes "".
+      
+Approach:(Naive)       Best - sc:O(1)   tc:O(n)||O(m)
+1.whenever a backspace is found update the string by removing one character from string.
+2.Check whether 2 strings are equal or not.
+
+Approach:(Stack)        sc:O(n)     tc:O(n)||O(m)
+1.Insert elements to stack and pop top when # is found.
+2.Update the string again with stack elements.
+3.Check if both strings arae same or not if yes return true else false.
+
+
+Solution:
+class Solution {
+    public boolean backspaceCompare(String s, String t) {
+        Stack <Character> st=new Stack<>();
+        
+        for(int i=0;i<s.length();i++){
+            if(!st.empty() && s.charAt(i)=='#'){
+                st.pop();
+            }
+            else if(s.charAt(i)!='#')
+               st.push(s.charAt(i));
+        }
+        s="";
+        while(!st.empty())
+            s+=st.pop();
+
+        for(int i=0;i<t.length();i++){
+            if(!st.empty() && t.charAt(i)=='#'){
+                st.pop();
+            }
+           else if(t.charAt(i)!='#')
+               st.push(t.charAt(i));
+        }
+        t="";
+        while(!st.empty())
+            t+=st.pop();
+
+        if(s.equals(t)) return true;
+        return false;
+    }
+}
