@@ -1,0 +1,45 @@
+https://leetcode.com/problems/make-the-string-great/
+
+Given a string s of lower and upper case English letters.
+A good string is a string which doesn't have two adjacent characters s[i] and s[i + 1] where:
+        0 <= i <= s.length - 2
+        s[i] is a lower-case letter and s[i + 1] is the same letter but in upper-case or vice-versa.
+To make the string good, you can choose two adjacent characters that make the string bad and remove 
+        them. You can keep doing this until the string becomes good.
+        
+Example:
+ex1:  s = "leEeetcode"   o/p:leetcode
+ex2:  s = "abBAcC"       o/p:""
+
+Note: diff between capital letter and small letter of same alphabet is 32.
+
+Approach:(Naive)     Best:sc:O(1)   tc:O(n)
+1.Check if adjacent elements are small and capital of same character if yes then move 2 steps further.
+  (don't add them to string)
+2. Else add them to string.
+
+Approach:(Stack)
+1.If stack top and curr elements diff is 32 remove stack top
+2.Else push element to stack.
+3.Pop all the elements from stack and insert them into string return it
+
+Solution:
+
+class Solution {
+    public String makeGood(String s) {
+        Stack<Character> st=new Stack<>();
+        StringBuilder sb=new StringBuilder();
+        for(int i=0;i<s.length();i++){
+            if(!st.empty() && Math.abs(st.peek()-s.charAt(i)) ==32){
+                st.pop();
+            }
+            else
+               st.push(s.charAt(i));  
+        }
+        while(!st.empty()){
+            sb.append(st.pop());
+        }
+       // System.out.print('e'-'E');
+        return sb.reverse().toString();
+    }
+}
