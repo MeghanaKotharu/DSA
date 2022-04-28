@@ -1,0 +1,64 @@
+https://leetcode.com/problems/baseball-game/
+
+At the beginning of the game, you start with an empty record. You are given a list of strings ops,
+    where ops[i] is the ith operation you must apply to the record and is one of the following:
+
+An integer x - Record a new score of x.
+"+" - Record a new score that is the sum of the previous two scores. It is guaranteed there will always be two previous scores.
+"D" - Record a new score that is double the previous score. It is guaranteed there will always be a previous score.
+"C" - Invalidate the previous score, removing it from the record. It is guaranteed there will always be a previous score.
+Return the sum of all the scores on the record.
+
+ex: ops = ["5","2","C","D","+"]     o/p:30
+stack--> 5,2 
+1.Apply operation c 
+stack-->5      
+2.Apply operation d
+stack--> 5 10 
+3.Apply operation +
+stack--> 5 10 15
+
+How Stack?
+We used stack here bez in stack we have the facility to access previous elements.
+
+Approach:(Naive)
+1.Use an array list insttead of stack operations 1,3,4 are same.
+2.If it is +then access last 2 elements of AL and then add the sum to AL.
+
+Approach: (Stack)
+1.Insert elements on to the stack if it is a number.
+2.If it is + then peek last to elements and perform addition insert it again into stack.
+3.If it is c then pop top element from stack.
+4.If it is d peek last element double it and insert to stack.
+5.Finally pop all elements in stack add them and return their sum.
+
+Solution:
+class Solution {
+    public int calPoints(String[] ops) {
+        Stack<Integer> st=new Stack<>();
+        String s;
+        int f,l,sum=0;
+        
+        for(int i=0;i<ops.length;i++){
+            s=ops[i];
+            if(s.charAt(0)=='+'){
+                l=st.pop();
+                f=l+st.peek();
+                st.push(l);
+                st.push(f);
+            }
+            else if(s.charAt(0)=='D') 
+                st.push(st.peek()*2);
+            else if(s.charAt(0)=='C') 
+                st.pop();
+            else
+                st.push(Integer.parseInt(ops[i]));  
+        }
+        
+        for(Integer c: st){
+            System.out.println(c);
+            sum+=c;
+        }
+        return sum;
+    }
+}
