@@ -36,10 +36,20 @@ class Solution {
             else
                st.push(s.charAt(i));  
         }
+        
+        /* for(Character c: st){
+            sb.append(c);
+        }
+        return sb.toString()*/
+        
         while(!st.empty()){
             sb.append(st.pop());
         }
        // System.out.print('e'-'E');
         return sb.reverse().toString();
+                
     }
 }
+Note: Incase of string iteration if you want to iterate from start then use either for each loop or
+      iterator
+      If you want to iterate from top of stack while printing then use while loop like above
