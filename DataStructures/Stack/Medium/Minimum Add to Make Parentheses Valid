@@ -1,0 +1,42 @@
+https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/
+
+You are given a parentheses string s. In one move, you can insert a parenthesis at any position of the string.
+
+A parenthesis is valid if all the open brackets has it's equivalent closing bracket
+Return the minimum number of moves required to make s valid.
+
+Example 1:
+Input: s = "())"
+Output: 1
+
+Example 2:
+Input: s = "((("
+Output: 3
+
+Hint: You need not actually add a ) everytime you simply need to know how many ) are 
+needed to make parenthesis valid so instead of inserting a )at missing places 
+count the wrong ones
+
+
+Approach:
+1.If you get a open bracket insert it to stack.
+2.If you get a closed bracket pop the stack top if stack is not empty
+3.If stack is empty increment count (no of operations to be made.)
+
+Solution:
+class Solution {
+    public int minAddToMakeValid(String s) {
+        Stack<Character> st=new Stack<>();
+        int count=0;
+        for(char c:s.toCharArray()){
+            if(c=='(')
+                st.push(c);
+            else {
+                if(st.empty()) count++;
+                else if(st.peek()=='(') st.pop();  
+            }
+        }
+        if(!st.empty()) count+=st.size();
+        return count;
+    }
+}
