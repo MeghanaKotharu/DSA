@@ -1,0 +1,50 @@
+https://leetcode.com/problems/crawler-log-folder/
+
+The Leetcode file system keeps a log each time some user performs a change folder operation.
+The operations are described below:
+
+"../" : Move to the parent folder of the current folder. 
+      (If you are already in the main folder, remain in the same folder).
+"./" : Remain in the same folder.
+"x/" : Move to the child folder named x (This folder is guaranteed to always exist).
+
+You are given a list of strings logs where logs[i] is the operation performed by the user at the ith step.
+The file system starts in the main folder, then the operations in logs are performed.
+
+Return the minimum number of operations needed to go back to the main folder after the change folder operations.
+
+Example:
+Input: logs = ["d1/","d2/","../","d21/","./"]
+Output: 2
+Explanation: Use this change folder operation "../" 2 times and go back to the main folder.
+
+
+
+Approach:(Stack)  tc:O(n)  sc:O(n)
+1.whenever you encounter a ./ skip just like above.
+2.If you has../ and stack is not empty pop one item from stack.
+3.Anything else insert into Stack.
+4.At last return size of stack.
+
+
+Approach:(NO stack)  tc:O(n)  sc:O(1)
+  we keep a count variable to know the no of positions we have moved till start
+1. ./ -> remain in same folder so we leave it and continue if we has ./
+2. ../ -> go back so reduce count by one
+3. anything else like d1/...etc means we are moving down so increase count by 1.
+
+
+
+Solution:(NO stack)
+class Solution {
+    public int minOperations(String[] logs) {
+        int count=0;
+        for(String s:logs){
+            if(s.equals("./") || (count==0 && s.equals("../"))) continue;
+            else if(s.equals("../")) count--;
+            else count++;
+        }
+        if(count<0) return 0;
+        return count;
+    }
+}
