@@ -1,0 +1,45 @@
+https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
+
+Input: head = [1,2,3,3,4,4,5]
+Output: [1,2,5]
+
+Input: head = [1,1,1,2,3]
+Output: [2,3]
+
+Approach:
+1.Create a dummy node and make it head so that we can skip the head for calculation.
+    (In this problem we skipped checking the head by adding a dummy node at front)
+2.Keep a prev pointer starting from head and a temp pointer starting from head.next
+3.while temp is equal to temp.next change prev.next to temp.next.next
+4.Else just move the pointer further.
+5.Remove the dummy head.
+
+Solution:
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head==null || head.next==null) return head;
+        
+        ListNode temp=head.next,prev=head;
+        ListNode FakeHead=new ListNode(0);
+        
+        FakeHead.next=head;
+        head=FakeHead;
+        
+
+        while(temp!=null && temp.next!=null){
+            if(temp.next!=null && temp.val==temp.next.val){ 
+               while(temp.next!=null && temp.val==temp.next.val){                   
+                  prev.next=temp.next.next;
+                  temp=temp.next;
+               }
+            }
+            else 
+            // we shouldn't increment the prev if went into the while loop bez we have updated in loop so we need to check that value again.
+               prev=prev.next;
+            temp=temp.next;
+        }
+        
+        head=head.next;
+        return head;
+    }
+}
