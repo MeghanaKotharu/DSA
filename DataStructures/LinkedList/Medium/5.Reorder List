@@ -1,0 +1,108 @@
+https://leetcode.com/problems/reorder-list/
+
+Input: head = [1,2,3,4]
+Output: [1,4,2,3]
+Explanation: one node from the first one node from the last.
+
+Approach:
+1.First reverse the mid+1 part of LL.
+2.Now add the elements one by one one from starting and one from mid+1 position
+
+I have written it very complicated to understand.
+Solution: (My code)    
+class Solution {
+    public void reorderList(ListNode head) {
+        ListNode result=new ListNode();
+        ListNode p1=head, p2=head,prev=null,t=head,temp=head;
+        int ch=0,count=0;
+        while(temp!=null){ 
+            temp=temp.next;
+            count++; 
+        }
+        while(p2.next!=null && p2.next.next!=null){
+            p2=p2.next.next;
+            p1=p1.next;   //p2->fast pointer p1->slow pointer
+        }
+        p2=p1;
+        p1=p1.next;
+        while(p1!=null){
+            t=p1.next;
+            p1.next=prev;
+            prev=p1;
+            p1=t;
+        }
+        
+        p2.next=prev;
+        p2=p2.next;
+        
+        p1=head;
+        t=head;
+       while(p2!=null){
+             if(ch==0){
+                    t=p1.next;
+                    if(t==null){
+                        p1.next=null;
+                        break;
+                    }
+                    p1.next=p2;
+                    p1=t;
+                    ch=1;
+      
+             }
+            else{
+                t=p2.next;
+                if(t==null){
+                     p2.next=null;
+                     break;
+                }
+                p2.next=p1;
+                p2=t;
+                ch=0;
+            }
+        }
+        if(head!=null && head.next!=null && count%2!=0){
+            p2.next=p1;
+            p1.next=null;
+        }
+    }
+}
+
+
+One of the good and understandable code of a person (Same approach) see most voted for this in comments
+
+Solution:
+public void reorderList(ListNode head) {
+            if(head==null||head.next==null) return;
+            
+            //Find the middle of the list
+            ListNode p1=head;
+            ListNode p2=head;
+            while(p2.next!=null&&p2.next.next!=null){ 
+                p1=p1.next;
+                p2=p2.next.next;
+            }
+            
+            //Reverse the half after middle  1->2->3->4->5->6 to 1->2->3->6->5->4
+            ListNode preMiddle=p1;
+            ListNode preCurrent=p1.next;
+            while(preCurrent.next!=null){
+                ListNode current=preCurrent.next;
+                preCurrent.next=current.next;
+                current.next=preMiddle.next;
+                preMiddle.next=current;
+            }
+            
+            //Start reorder one by one  1->2->3->6->5->4 to 1->6->2->5->3->4
+            p1=head;
+            p2=preMiddle.next;
+            while(p1!=preMiddle){
+                preMiddle.next=p2.next;
+                p2.next=p1.next;
+                p1.next=p2;
+                p1=p2.next;
+                p2=preMiddle.next;
+            }
+        }
+
+
+
