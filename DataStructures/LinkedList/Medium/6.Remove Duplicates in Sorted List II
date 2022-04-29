@@ -7,6 +7,11 @@ Input: head = [1,1,1,2,3]
 Output: [2,3]
 
 Approach:
+Main idea is we keep track of prev node and curr node so that when we find 2 similar nodes (curr and curr.next)
+    we remove both of them by changing next address of prev to curr.next.next
+But there is a problem what about the intial node? we can't check the intial node in such a way for that we used the dummy node
+    we created a dummy node and made head as we don't check the dummy node anyway it won't disturb our solution
+    
 1.Create a dummy node and make it head so that we can skip the head for calculation.
     (In this problem we skipped checking the head by adding a dummy node at front)
 2.Keep a prev pointer starting from head and a temp pointer starting from head.next
