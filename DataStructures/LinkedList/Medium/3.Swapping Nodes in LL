@@ -1,0 +1,48 @@
+https://leetcode.com/problems/swapping-nodes-in-a-linked-list/
+
+You are given the head of a linked list, and an integer k.
+Return the head of the linked list after swapping the values of the kth 
+        node from the beginning and the kth node from the end (the list is 1-indexed).
+
+ex:  [1,2,3,4,5], k = 2
+o/p: [1,4,3,2,5]
+First kth node and last kth node are replaced.
+
+Approach:
+1.Count the no of elements in LL
+2.We can simply keep 2 pointers at the 2 required positions(k and n-k)
+3.Then swap values of these 2 pointers.
+
+
+Solution:
+class Solution {
+    public ListNode swapNodes(ListNode head, int k) {
+        ListNode temp=head,start=head,t=head;                
+        int n=1,count=0;
+        //start refers to the element from front to last 
+        //temp refers to the element from last   
+        
+        //Counting the size of LL
+        while(temp.next!=null){
+            n++;
+            temp=temp.next;  
+        }
+        
+        temp=head;
+        while(t!=null){
+            if(count<k-1)  start=start.next;    //Moving the start till kth position
+            if(count<n-k)  temp=temp.next;      //Moving the temp till n-k position ie k from last
+            t=t.next;
+            count++;
+        }
+        
+        return firstandlastswap(start,temp,head);   //swapping the values of 2.
+    }
+    
+    static ListNode firstandlastswap(ListNode start,ListNode temp,ListNode head){
+        int l=start.val;
+        start.val=temp.val;
+        temp.val=l;
+        return head;
+    }
+}
