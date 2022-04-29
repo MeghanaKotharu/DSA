@@ -10,7 +10,7 @@ First kth node and last kth node are replaced.
 
 Approach:
 1.Count the no of elements in LL
-2.We can simply keep 2 pointers at the 2 required positions(k and n-k)
+2.We can simply keep 2 pointers at the 2 required positions(k and n-k+1) (index starts at 1)
 3.Then swap values of these 2 pointers.
 
 
@@ -19,8 +19,8 @@ class Solution {
     public ListNode swapNodes(ListNode head, int k) {
         ListNode temp=head,start=head,t=head;                
         int n=1,count=0;
-        //start refers to the element from front to last 
-        //temp refers to the element from last   
+        //start refers to the element from front(at position k)
+        //temp refers to the element from last(at n-k+1)
         
         //Counting the size of LL
         while(temp.next!=null){
