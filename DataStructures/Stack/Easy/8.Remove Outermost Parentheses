@@ -1,0 +1,55 @@
+https://leetcode.com/problems/remove-outermost-parentheses/
+
+Example 1:
+Input: s = "(()())(())"
+Output: "()()()"
+
+Explanation: 
+The input string is "(()())(())", with primitive decomposition "(()())" + "(())".
+After removing outer parentheses of each part, this is "()()" + "()" = "()()()".
+
+Example 2:
+Input: s = "(()())(())(()(()))"
+Output: "()()()()(())"
+
+Explanation: 
+The input string is "(()())(())(()(()))", with primitive decomposition "(()())" + "(())" + "(()(()))".
+After removing outer parentheses of each part, this is "()()" + "()" + "()(())" = "()()()()(())".
+
+Example 3:
+Input: s = "()()"
+Output: ""
+
+Explanation: 
+The input string is "()()", with primitive decomposition "()" + "()".
+After removing outer parentheses of each part, this is "" + "" = "".
+
+Approach:
+1.we Shouldn't add the first paarenthesis so we add parenthesis to a new string(sb) only when stack has some value.
+   we push each "(" onto stack (which allow us to skip the first "(" ).
+2.when we have ")" we pop from stack and add it to new string(sb) only until stack size is >1.
+  which allows us to skip the last ")".
+
+Solution:
+class Solution {
+    public String removeOuterParentheses(String s) {
+        Stack<Character> st=new Stack<>();
+        String sb="";
+        int k=0,l=0;
+        
+        for(int i=0;i<s.length();i++){  //for(char ch : s.toCharArray()) {
+            char c=s.charAt(i);
+            if(c=='('){
+                if(st.size()!=0)
+                    sb+=c;
+                st.push(c);
+            }
+            else{
+                if(st.size()!=1) 
+                    sb+=c;
+                st.pop();
+            }
+        }
+        return sb;
+    }
+}
