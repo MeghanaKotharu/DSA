@@ -1,0 +1,37 @@
+https://leetcode.com/problems/linked-list-cycle-ii/
+
+Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.
+Note:Pos won't be given to us.
+
+Example1:
+head = [3,2,0,-4], pos = 1
+Output: tail connects to node index 1
+
+Explanation: There is a cycle in the linked list, where tail connects to the second node.
+
+Approach:
+1.When there is a cycle fast and slow will be equal sometime so when they become equal we need to find out the 
+node where cycle begins
+2.for that we make the fast to head again and move both of them only once.
+3.The position at which they will meet will be the start of loop
+
+Solution:
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;        
+        while (fast!=null && fast.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;                    
+            if (fast == slow){
+                fast= head; 
+                while (fast != slow){
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+                return fast;
+            }
+        }
+        return null;
+    }
+}
