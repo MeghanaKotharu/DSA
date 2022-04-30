@@ -9,6 +9,8 @@ Output: tail connects to node index 1
 
 Explanation: There is a cycle in the linked list, where tail connects to the second node.
 
+![image](https://user-images.githubusercontent.com/70280546/166112578-7b523d14-5c66-4a02-bc4c-ae49169c68ee.png)
+
 Approach:(Floyd Warshall Algorithm)
 1.When there is a cycle fast and slow will be equal sometime so when they become equal we need to find out the 
 node where cycle begins
