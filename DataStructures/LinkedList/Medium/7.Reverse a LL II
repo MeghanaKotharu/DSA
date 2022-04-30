@@ -1,0 +1,71 @@
+https://leetcode.com/problems/reverse-linked-list-ii/
+Given the head of a singly linked list and two integers left and right where left <= right, 
+     reverse the nodes of the list from position left to position right, and return the reversed list.
+     
+Example1:
+Input: head = [1,2,3,4,5], left = 2, right = 4
+Output: [1,4,3,2,5]
+
+Example 2:
+Input: head = [5], left = 1, right = 1
+Output: [5]
+
+Approach:
+ Store the elements before the left (Beforeleft) and after right(temp-->this will be stored 
+              automatically after iterating till the end of right)
+1.Create a new Listnode(result) and add all the elements in between left and right.
+2.Now reverse the list(result).
+3.simply connect them to the nodes stored before (beforeRight-->for adding elements in between) and(temp-->for adding at last) 
+   that has elements after right.
+
+Solution:
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode result=new ListNode();
+        ListNode res=result,temp=head,t,prev=null,beforeLeft=null;
+        int count=1;
+        if(head==null || head.next==null || left==right) return head;
+        
+        //adding the elements in between left and right into res.        
+        while(temp!=null ){
+            if(count+1==left) beforeLeft=temp;
+            if(count>=left && count<=right){
+                 //Creating a new node before inserting value(already one node will be created while declarartion) so
+                 we need to move result to one step forward.
+                res.next=new ListNode();
+                res=res.next;
+                res.val=temp.val;                
+            }
+            temp=temp.next;
+            count++;
+            if(count>right) break;
+        }
+        //moved result one step forward.
+        result=result.next;
+        res=result;
+        
+        //reversing the elements in the result node.        
+        while(res!=null){
+            t=res.next;
+            res.next=prev;
+            prev=res;
+            res=t;
+        }
+
+        //Adding the left node elements to before left
+        if(beforeLeft!=null)             
+            beforeLeft.next=prev;
+        else // when left is at starting point ie.head
+            head=prev;
+            
+        while(prev.next!=null){
+            prev=prev.next;
+            if(prev.next==null){
+                prev.next=temp;
+                break;
+            }
+        }
+
+        return head;
+    }
+}
