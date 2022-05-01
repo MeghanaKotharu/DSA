@@ -1,0 +1,52 @@
+https://leetcode.com/problems/partition-list/
+
+Given the head of a linked list and a value x, partition it such that all nodes less than x come 
+before nodes greater than or equal to x.
+
+You should preserve the original relative order of the nodes in each of the two partitions.
+
+Input: head = [1,4,3,2,5,2], x = 3
+Output: [1,2,2,4,3,5]
+
+Input: head = [2,1], x = 2
+Output: [1,2]
+
+Approach:
+1.Create 2 LL (Less and Greater) add the elements less than x to less LL and greater than x to greater ll
+2.Now join both the LL.
+3.If there are no element less than x then less will be empty so check if les==empty if true return greater itself.
+
+Solution:
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        ListNode less=new ListNode();
+        ListNode greater=new ListNode();        
+        ListNode temp=head,p1=less,p2=greater;
+        
+        if(head==null || head.next==null) return head;
+        /* if number is less than x add it to less LinkedList
+            else add it to greater LL */
+        while(temp!=null){
+            if(temp.val<x){
+                p1.next= new ListNode();
+                p1=p1.next;
+                p1.val=temp.val;                
+            }
+            else{
+                p2.next= new ListNode();
+                p2=p2.next;
+                p2.val=temp.val;  
+            }
+            temp=temp.next;
+        }
+        //the above loop adds empty nodes at the starting of LL so we are moving the heads to one step
+        less=less.next;
+        greater=greater.next;
+        
+        //Adding the greater LL to less LL
+        p1.next=greater;
+        
+        if(less==null) return greater;
+        return less;
+    }
+}
