@@ -1,0 +1,64 @@
+https://leetcode.com/problems/add-two-numbers/
+
+You are given two non-empty linked lists representing two non-negative integers.
+The digits are stored in reverse order, and each of their nodes contains a single digit. 
+Add the two numbers and return the sum as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Input: l1 = [2,4,3], l2 = [5,6,4]  
+Output: [7,0,8]              //reverse of l1+l2=sum then return reverse of sum
+Explanation: 342 + 465 = 807.
+
+Approach:
+1.Add the values of 2 LL into 2 new StringBuilders
+2.Reverse the strings and Convert the 2 Strings into BigInteger and add them
+3.Again convert the BigInteger value into LL and return it.
+
+Solution:
+import java.math.*;
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        if(l1==null) return l2;
+        if(l2==null) return l1;
+        
+        ListNode result=new ListNode();
+        ListNode t1=l1,t2=l2,res=result;
+        StringBuilder sb1=new StringBuilder();
+        StringBuilder sb2=new StringBuilder();
+        
+        //Adding all the elements from L1 and l2 into to strings sb1,sb2
+        while(t1!=null && t2!=null){
+            sb1.append(t1.val);
+            t1=t1.next;           
+            sb2.append(t2.val);
+            t2=t2.next;
+        }
+        while(t1!=null){
+            sb1.append(t1.val);
+            t1=t1.next;
+        }
+        
+        while(t2!=null){
+            sb2.append(t2.val);
+            t2=t2.next;
+        }
+        
+        //Adding both the values of sb1 by reversing them as we need reverse sum of elements
+        BigInteger sum=new BigInteger(sb1.reverse().toString()).add(new BigInteger(sb2.reverse().toString()));
+       
+        sb1.setLength(0);   // emptying stringBuilder1
+        sb1.append(sum);   //Adding them again to sb1 and reversing it as we need the answer in reverse
+        sb1.reverse();
+        
+        //adding the solution to a new ll again and returning it.
+        for(int i=0;i<sb1.length();i++){
+            res.val=sb1.charAt(i)-'0';  //converting num into a integer then adding.
+            if(i+1!=sb1.length()){
+               res.next=new ListNode();
+               res=res.next;
+            }
+        }
+        return result;
+    }
+}
