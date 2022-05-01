@@ -1,0 +1,51 @@
+https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+
+Given the head of a linked list, remove the nth node from the end of the list and return its head.
+
+Input: head = [1,2,3,4,5], n = 2
+Output: [1,2,3,5]
+
+Input: head = [1], n = 1
+Output: []
+
+Input: head = [1,2], n = 1
+Output: [1]
+
+Approach:
+1.Count the size(size) of the list.
+2.Move till you reach the size-n position and change the next of that temp node to next.next
+3.Incase you need to remove the last node make temp.next=null (you can get that by checking if temp.next.next==null)
+4.Incase you want to remove first node(size==n) move head one position and return it.
+Solution:
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode temp=head;
+        int size=0,count=0;
+        
+
+        //size of list
+        while(temp!=null){
+            size++;
+            temp=temp.next;
+        }
+        
+        temp=head; 
+        
+        //If we should remove starting node
+        if(size==n){
+            head=head.next;
+            return head;
+        }
+        
+        //moving temp till we reach n-1 node
+        while(temp.next!=null && (count+1)<size-n){
+            temp=temp.next;
+            count++;
+        }
+
+        if(temp.next!=null && temp.next.next!=null)temp.next=temp.next.next;
+        else temp.next=null;
+        
+        return head;
+    }
+}
