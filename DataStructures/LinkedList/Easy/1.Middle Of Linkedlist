@@ -6,11 +6,16 @@ ex1:  1->2->3->4->5       o/p: 3->4->5
 ex2: 1->2->3->4->5->6    o/p:4->5->6
 
 
-Approach: 
+Approach: tc:0(n)    sc:0(1)
 1. Using a temp variable count(k) the no of elements in ll.
 2. Intialize temp to head again for re-use and count=k/2 
      Move the temp till count>0
  It will automatically be moved to the second middle incase of even
+
+Approach 2: tc: 0(n/2)-->0(n)  sc:0(1)
+1.Use 2 pointer technique fast and slow point to head intially.
+2.slow moves one step will fast moves 2 steps front.
+3.By the time fast reaches end slow will be at middle.
 
 class Solution {
     public ListNode middleNode(ListNode head) {
