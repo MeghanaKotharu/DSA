@@ -4,12 +4,13 @@ Notes for reference
     Instead we need to create an another pointer pointing to head an move it further and make changes or utilize elements etc.
 
 2.The fast and slow pointers can be used to get the slow pointer to the middle element 
-    What we will be doing is: 
+    What we will be doing is:
+
        1. We keep 2 pointers fast and slow at the head node
        2. We move the slow pointer by 1 step and fast pointer by 2 steps.
     So when the fast pointer reaches end, slow pointer be at the middle.
 
-3. 2 pointers technique is widely used in LL.
+3.Two pointers technique is widely used in LL.
 
 
 
