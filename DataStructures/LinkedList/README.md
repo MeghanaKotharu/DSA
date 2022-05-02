@@ -1,7 +1,8 @@
 Notes for reference
 
 1.we should never move the head node of a LL futher if we do that we will be losing all the nodes at front.
-    Instead we need to create an another pointer pointing to head an move it further and make changes or utilize elements etc.
+    
+Instead we need to create an another pointer pointing to head an move it further and make changes or utilize elements etc.
 
 2.The fast and slow pointers can be used to get the slow pointer to the middle element 
     What we will be doing is:
