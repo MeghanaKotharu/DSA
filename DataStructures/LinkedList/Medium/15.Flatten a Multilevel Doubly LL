@@ -1,0 +1,92 @@
+https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/
+
+You are given a doubly linked list, which contains nodes that have a next pointer, a previous pointer, 
+and an additional child pointer. This child pointer may or may not point to a separate doubly linked list, 
+also containing these special nodes. These child lists may have one or more children of their own, and so on, 
+to produce a multilevel data structure as shown in the example below.
+
+Given the head of the first level of the list, flatten the list so that all the nodes appear in a single-level,
+doubly linked list. Let curr be a node with a child list. The nodes in the child list should appear after curr 
+and before curr.next in the flattened list.
+
+Return the head of the flattened list. The nodes in the list must have all of their child pointers set to null.
+
+
+Input: head = [1,2,3,4,5,6,null,null,null,7,8,9,10,null,null,11,12]
+Output: [1,2,3,7,8,11,12,9,10,4,5,6]
+
+![image](https://user-images.githubusercontent.com/70280546/166473214-036ea079-fc82-4817-a7da-d3c0d9b66da0.png)
+
+Approach1:  O(2*n) =O(n)   sc:O(1)
+1. whenever you find a child for curr you should add it to the line so first store curr.next(t1).
+2. Take another pointer t=curr.child and move it till the end inorder to get the end of the child nodelist once you got to the end
+     add the end of the t next to t1 now you got a line and cleared one list. //second while loop.
+3.Now we again start incrementing the curr and now visit the elements of child nodes again (twice) check if they have any sub children.
+
+According to qn we should also add the prev node of some nodes which require and make chlid node refernce to null.
+
+
+Tc:O(2*n)=O(n) ->bez if there are children for each and every node each node will be visited twice which makes it 2*n
+    when we say O(n^2)->it means each node will be visited n times
+    
+Solution:
+class Solution {   
+    public Node flatten(Node head) {
+       Node temp=head,t,t1;
+        
+       while(temp!=null){            
+            if(temp.child!=null){
+                //t->traverses through out child node till end and makes child as null
+                t=temp.child;  
+                t.prev=temp;
+                temp.child=null;  
+                
+                //t1->Stores next element of temp(curr)
+                t1=temp.next;  
+                
+                //changes temp next to t 
+                temp.next=t;  
+                
+                //traverses till the end of t
+                while(t.next!=null){
+                    t=t.next;
+                } 
+                
+                if(t1!=null) t1.prev=t;
+                t.next=t1;
+            }
+            temp=temp.next;
+        }
+        return head;
+    }
+}
+
+
+Approach2:     tc:O(n)  sc:O(n)
+1.We traverse through the child nodes first then the main problem is we will loose the reference of next variables
+     so we need to store all those refernces for that we use stack
+     
+     
+ Solution:
+ class Solution {
+    public Node flatten(Node head) {
+        Node curt = head;
+        Stack<Node> stack = new Stack<>(); // store curt.next when curt.child is not null
+        
+        while(curt != null) {
+            if(curt.child != null) {
+                stack.push(curt.next); // might be null
+                curt.next = curt.child;
+                if(curt.next != null) curt.next.prev = curt;
+                curt.child = null;
+            } else if(curt.next == null && !stack.isEmpty()) { // reach of tail of child, reconnet the next of parent
+                curt.next = stack.pop();
+                if(curt.next != null) curt.next.prev = curt;
+            }
+            
+            curt = curt.next;
+        }
+        
+        return head;
+    }
+}
