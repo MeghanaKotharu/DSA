@@ -5,7 +5,7 @@ ex:    1->2->3->4->5->6
 o/p:   6->5->4->3->2->1
 
 
-Approach:
+Approach: tc:O(n) sc:O(1)
 1.Solve one node at a time ie. change the refernce of one node to previous and keep on doing it
 2.Let's solve by this example:
             1->2->3->4       curr=1,    prev=null,   temp=store curr.next value as we change the refernce of curr to prev next values shouldn't be lost so store them (2->3->4)
