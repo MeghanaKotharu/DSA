@@ -6,7 +6,7 @@ Given the head of a sorted linked list, delete all duplicates such that
 ex:    1->1->2
 o/p:   1->2
 
-Approach:
+Approach: tc:O(n) sc:O(1)
 1.while the adjacent elements are same remove them.
 
 Solution:
@@ -23,3 +23,5 @@ class Solution {
         return head;
     }
 }
+
+https://leetcode.com/problems/remove-duplicates-from-sorted-list/discuss/28614/My-pretty-solution.-Java.
