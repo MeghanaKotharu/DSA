@@ -1,0 +1,36 @@
+https://leetcode.com/problems/sort-list/
+
+Given the head of a linked list, return the list after sorting it in ascending order.
+
+Input: head = [4,2,1,3]
+Output: [1,2,3,4]
+
+Approach:   tc:O(nlogn)   sc:O(n)
+1.Add all the elements of a list into array and sort the array.
+2.Replace the elements in the linkedlist with new elements.
+Sollution:
+class Solution {
+    public ListNode sortList(ListNode head) {
+        ListNode temp=head;
+        int count=0,i=0,j=0;
+        while(temp!=null){
+            count++;
+            temp=temp.next;
+        }
+        
+        temp=head;
+        int a[]=new int[count];
+        while(temp!=null){
+            a[i++]=temp.val;
+            temp=temp.next;
+        }
+        
+        Arrays.sort(a);
+        temp=head;
+        while(temp!=null){
+            temp.val=a[j++];
+            temp=temp.next;
+        }
+        return head;
+    }
+}
