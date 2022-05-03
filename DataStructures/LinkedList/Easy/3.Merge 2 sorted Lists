@@ -10,7 +10,7 @@ ex:   1->2->4
 o/p:  1->1->2->3->4->4
 
 
-Approach:
+Approach:  tc: O(n+m)  sc:O(n)
 1.Take a new List(res) and add elements into it.
 2.Iterate till one of the list1 and 2 reach the end 
       if list1 has smaller element then first add it to res and move list1 to next position.
@@ -63,3 +63,29 @@ class Solution {
         return head;
     }
 }
+
+Approach2:
+We just created a dummy node and kept a curr reference to it now instead of created a new node for every item
+  we simply referred them to the l1 and l2 node addresses
+
+Solution:  tc:O(n+m) sc:O(1)
+public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+
+        ListNode dummy = new ListNode(0);   //O(1)
+        ListNode curr = dummy;
+        
+        while(l1 != null && l2!= null){
+            if(l1.val <= l2.val){
+                curr.next = l1;
+                l1 = l1.next;
+            }else {
+                curr.next = l2;
+                l2 = l2.next;
+            }
+            curr = curr.next;
+        }
+        
+        curr.next = l1 == null? l2:l1; //incase l1 reached end we simply add remaining l2 elements to the list.
+        
+        return dummy.next;
+    }
