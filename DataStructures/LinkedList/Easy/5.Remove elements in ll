@@ -1,10 +1,13 @@
+https://leetcode.com/problems/remove-linked-list-elements/
+
+
 Given the head of a linked list and an integer val, remove all the nodes of the linked list 
            that has Node.val == val, and return the new head.
            
 ex1:     1->2->6->3->4->5->6         val=6
 o/p:    1->2->3->4->5
 
-ex2:    7->7->7->7->      val=7
+ex2:    7->7->7->7->7      val=7
 o/p:    ""
 
 
@@ -17,14 +20,13 @@ Approach:
        of curr from next to next next
        
 Note: I used a while loop at 38 line bez if 2->6->6->4 comes then 
-       we need remove the value of next next as well  the below way will happen
+       we need remove the value of next next as well then the below way will happen
        2->6->6->4     curr=2  next=6  next next=6
        2->6->4        curr=2  next=6  next next=4
-       2->4           curr=2  next=6
+       2->4           curr=2  next=4
 
 
-Solution: 
-
+Solution: tc:O()   sc-O(1)
 class Solution {
     public ListNode removeElements(ListNode head, int val) {
         ListNode temp=head,prev=head;
@@ -42,3 +44,30 @@ class Solution {
         return head;
     }
 }
+
+Approach 2:  tc:O(n)   sc-O(1)
+1.U can also create a dummy node at the beginning and link it to head make dummy node as head
+2.Now check from head then You will only need one while loop(2nd one)
+
+https://leetcode.com/problems/remove-linked-list-elements/discuss/57324/AC-Java-solution
+
+Solution:
+public class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode fakeHead = new ListNode(-1);
+        fakeHead.next = head;
+        ListNode curr = head, prev = fakeHead;
+        while (curr != null) {
+            if (curr.val == val) {
+                prev.next = curr.next;
+            } else {
+                prev = prev.next;
+            }
+            curr = curr.next;
+        }
+        return fakeHead.next;
+    }
+}
+
+Approach 3: tc:O()   sc-O(n)
+1.Create a new LL and all elements from head to new LL except val nodes.
