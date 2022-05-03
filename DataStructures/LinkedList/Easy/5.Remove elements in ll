@@ -19,7 +19,8 @@ Approach:
     -->next is 6 ie value so we need to remove it for that we simply change the address 
        of curr from next to next next
        
-Note: I used a while loop at 38 line bez if 2->6->6->4 comes then 
+Note: I used a while loop at 38 line bez if 2->6->6->4 comes then  //or you can update the curr only when the next element is not equal to val
+//https://leetcode.com/problems/remove-linked-list-elements/discuss/57324/AC-Java-solution    check solution by gazua second in comments
        we need remove the value of next next as well then the below way will happen
        2->6->6->4     curr=2  next=6  next next=6
        2->6->4        curr=2  next=6  next next=4
@@ -37,7 +38,7 @@ class Solution {
             head=head.next;
         
         while(temp!=null){
-            while(temp.next!=null && temp.next.val==val)
+            while(temp.next!=null && temp.next.val==val)  
                 temp.next=temp.next.next;
             temp=temp.next;
         }
