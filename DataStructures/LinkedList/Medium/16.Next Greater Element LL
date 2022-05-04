@@ -1,0 +1,59 @@
+https://leetcode.com/problems/next-greater-node-in-linked-list/
+
+You are given the head of a linked list with n nodes.
+
+For each node in the list, find the value of the next greater node. 
+That is, for each node, find the value of the first node that is next to it 
+and has a strictly larger value than it.
+
+Input: head = [2,1,5]
+Output: [5,5,0]
+Explanation: Next Greater to 2 is 5
+                      for 1 is 5
+                      for 5 it is 0
+                     
+Approach:
+1.Reverse the given LL.
+2.Do NGL and return answer.
+
+Solution:  sc:O(n)  tc:O(n)
+class Solution {
+    public int[] nextLargerNodes(ListNode head) {
+        ListNode temp=head, curr=head,prev=null;
+        Stack <Integer> s =new Stack<>();
+        int size=0,i=1;
+        
+        //size of LL
+        while(temp!=null){
+            temp=temp.next;
+            size++;
+        }
+        int[] a=new int[size];
+
+        //Reversing LL
+        while(curr!=null){
+            temp=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=temp;
+            
+        }
+        
+        //Next greater Element in stack 
+        /*here tc is :O(2*n)=O(n)  
+              bez at worst u will be visiting each node twice
+                           1.Once in LL using temp.
+                           2.Once in stack after visiting in stack you will definetly remove it.
+                           */
+        temp=prev;
+        while(temp!=null){                        
+            while(!s.empty() && s.peek()<=temp.val)  s.pop();
+            a[size-i]=(s.empty())?(0):(s.peek());
+            
+            s.push(temp.val);
+            i++;
+            temp=temp.next;
+        }
+        return a;
+    }
+}
