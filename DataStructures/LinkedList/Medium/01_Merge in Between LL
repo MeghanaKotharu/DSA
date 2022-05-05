@@ -11,7 +11,7 @@ Note: Here a and b are indexes starting from 0.
 o/p: 0->1->10->11->12->13->5 
 
 
-Approach:
+Approach:  tc:O(m+n) sc:O(1)
 1.Move the curr variable till the index-1 is reached store that bez we need to link it to the the list2.
 2.Again continue moving the curr variable until all the elements within the range b are gone.
 3.Now add the list2 elements to curr's next  
