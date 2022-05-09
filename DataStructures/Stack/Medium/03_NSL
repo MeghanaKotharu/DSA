@@ -1,0 +1,36 @@
+https://practice.geeksforgeeks.org/problems/smallest-number-on-left3403/1/#
+
+Input: n = 3
+a = {1, 6, 2}
+Output: -1 1 1
+
+Input: n = 6
+a = {1, 5, 0, 3, 4, 5}
+Output: -1 1 -1 0 3 4
+
+Similar to Next Greater on Right sum
+we need to find the next smaller element on left for every element.
+
+class Solution{
+    static List<Integer> leftSmaller(int n, int a[])
+    {
+        Stack <Integer> s=new Stack<Integer>();
+        List<Integer> arr=new ArrayList<Integer>();
+        
+        for(int i=0;i<n;i++){            
+            if(s.isEmpty())
+               arr.add(-1);
+               
+            else if(a[i]>s.peek()) arr.add(s.peek());
+            
+            else if(s.size()>0 && s.peek()>=a[i]){            
+                while(s.size()>0 && s.peek()>=a[i])
+                      s.pop();
+                arr.add((s.isEmpty())?(-1):(s.peek()));
+            }
+            
+            s.push(a[i]);
+        }
+        return arr;
+    }
+}
