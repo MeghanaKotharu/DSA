@@ -43,7 +43,7 @@ else check incase of descending sorted array.
             else
                 return mid; // key found
         }
-        return -(start + 1);  // if key not found then -(thisVal+1) will give insertion point.
+        return -1
      }
      
      
