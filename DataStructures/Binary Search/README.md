@@ -19,6 +19,8 @@
     }
     
 **Order Agnostic Binary Search (when we don't know in which order array is sorted)**
+
+
 Just check any 2 elements in array to know if they are sorted in ascending order or not if ascending order search accordingly
 else check incase of descending sorted array.
      
