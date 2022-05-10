@@ -1,0 +1,71 @@
+https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+
+Given an array of integers nums sorted in non-decreasing order, find the starting and ending 
+position of a given target value.
+
+If target is not found in the array, return [-1, -1].
+You must write an algorithm with O(log n) runtime complexity.
+
+Example 1:
+
+Input: nums = [5,7,7,8,8,10], target = 8
+Output: [3,4]
+we need to return the index of that particular element's first and last.
+
+
+Note:
+There is slight modification to this problem incase of finding the total no of target values present in array
+Input:  [1,2,3,3,3,4,4,4,4,5,5,6,7,8,9,9,9,9,9]     target: 9
+Output:   5  (9 was present 5 times in array).
+In such case if we find the start and the end index of the target they are 15 and 19 (19-15+1)=5 
+so we just need to find the start and end of that index subtract them and add 1 to get the no of times it is present in the array
+
+
+
+Approach: tc:O(Logn)    sc:O(1)
+First let's divide the problem into calculate first occurence and calculate last occurence.
+
+Calculate First Occurence
+1.In usual binary search when we find target element we stop travering further.
+2.But here even when we found the target we need to check whether there is any target element before by moving forward (end=mid-1).
+3.We store the index of element found position if we find target further again we change it to newly found index.
+
+Calculate Last Occurence
+Similar to first function but here we move to right side of mid ie.(start=mid+1).
+
+Solution:
+class Solution {
+    public int[] searchRange(int[] nums, int target) {        
+        int first=calculateFirst(nums,target);
+        int last=calculateLast(nums,target);
+        return new int[]{first,last}; 
+    }
+    
+    public static int calculateFirst(int[] a,int target){
+        int s=0,e=a.length-1,first=-1;
+        while(s<=e){
+            int mid=s+(e-s)/2;
+            if(a[mid]==target){
+                first=mid;
+                e=mid-1;
+            }
+            else if(a[mid]>target)  e=mid-1;
+            else    s=mid+1;
+        }
+        return first;
+    }
+    
+    public static int calculateLast(int[] a,int target){
+        int s=0,e=a.length-1,last=-1;
+        while(s<=e){
+            int mid=s+(e-s)/2;
+            if(a[mid]==target){
+                last=mid;
+                s=mid+1;
+            }
+            else if(a[mid]>target)  e=mid-1;
+            else    s=mid+1;
+        }
+        return last;
+    }
+}
