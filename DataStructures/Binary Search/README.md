@@ -1,5 +1,4 @@
-Reference of Questions: Aditya Verma Youtube Channel
-
+**Reference of Questions:** Aditya Verma Youtube Channel
 
 **Binary Search in Descending order**
      
