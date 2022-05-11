@@ -22,7 +22,7 @@ class Compute {
         ArrayList<Long> ar=new ArrayList<>();
         while(j<N){
         
-            if((j-i+1) < K){    //window size was not reached yet         
+            if((j-i+1) < K){    //window size was not reached yet     //goes through this condition until we reach the window size    
                 if(A[j]<0)
                    ar.add(A[j]);
                 j++;                
@@ -30,12 +30,12 @@ class Compute {
             
             else{
                 if(A[j]<0) 
-                    ar.add(A[j]);
+                    ar.add(A[j]);             //adding new element into end of sw   
                 j++;
-                a[k++]=(ar.isEmpty() )?(0):(ar.get(0));
+                a[k++]=(ar.isEmpty() )?(0):(ar.get(0));      //adding ans to result  --first ele in arraylist
                 
                 if(A[i]<0 & (!ar.isEmpty())) 
-                     ar.remove(0);
+                     ar.remove(0);                  // removing first element in sw
                 i++;
             }
         }
