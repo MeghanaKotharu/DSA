@@ -55,7 +55,7 @@ you can increment head only once when the condition is not satisfied
      1->2->2->1     then fast will end at 2 and we shouldn't move it to 2.next.next as there is null
      for odd    1->2->->2->1->3     then fast will reach 3 and stops as fast.next==null
    
-12.When you **reverse a LL** at last don't forget to change the head of a LL to previous otherwise it will refer to last element only.[Reverse a LL](https://github.com/MeghanaKotharu/DSA/blob/main/DataStructures/LinkedList/Easy/7.Reverse%20a%20LL)
+12.When you **reverse a LL** at last don't forget to change the head of a LL to previous otherwise it will refer to last element only.[Reverse a LL](https://github.com/MeghanaKotharu/DSA/blob/main/DataStructures/LinkedList/Easy/07.%20Reverse%20a%20LL)
 
 
 
