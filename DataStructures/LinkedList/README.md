@@ -34,7 +34,7 @@ Instead we need to create an another pointer pointing to head an move it further
        
        ListNode dummy = new ListNode(0);   //O(1)   -->Step1
        ListNode curr = dummy;              //O(1)   -->Step2
-[Merge LL](https://github.com/meghanak994/DSA/blob/main/DataStructures/LinkedList/Easy/3.Merge%202%20sorted%20Lists)
+[Merge LL](https://github.com/MeghanaKotharu/DSA/blob/main/DataStructures/LinkedList/Easy/03.%20Merge%202%20sorted%20Lists)
 
 8.You can **store the previous node also sometimes**:
 
@@ -55,7 +55,7 @@ you can increment head only once when the condition is not satisfied
      1->2->2->1     then fast will end at 2 and we shouldn't move it to 2.next.next as there is null
      for odd    1->2->->2->1->3     then fast will reach 3 and stops as fast.next==null
    
-12.When you **reverse a LL** at last don't forget to change the head of a LL to previous otherwise it will refer to last element only.[](https://github.com/meghanak994/DSA/blob/main/DataStructures/LinkedList/Easy/7.Reverse%20a%20LL)
+12.When you **reverse a LL** at last don't forget to change the head of a LL to previous otherwise it will refer to last element only.[](https://github.com/MeghanaKotharu/DSA/blob/main/DataStructures/LinkedList/Easy/7.Reverse%20a%20LL)
 
 
 
