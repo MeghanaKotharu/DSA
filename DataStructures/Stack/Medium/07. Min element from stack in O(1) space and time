@@ -1,0 +1,68 @@
+https://practice.geeksforgeeks.org/problems/get-minimum-element-from-stack/1/#
+
+We need to get the minimum element from stack by performing O(1) time only
+Input:
+
+push(2)
+push(3)
+pop()
+getMin()
+push(1)
+getMin()
+
+Output: 3 2 1
+
+Approach:
+Push:
+1.If the stack is empty we simply push the element on to stack and keep the min element as x(given value).
+2.Else we push 2 elements onto stack
+        1. the Original element + curr minEle. (dummy)
+        2. the Original element
+3.Now we check if our min element is greater than the x(given val) if yes replace the curr minEle.
+
+Pop:
+1.If stack is empty return -1.
+2.Else we perform pop 2 times.
+       1. Once we simply remove the element (Original element from push 2.2)
+       2.Now pop the dummy element and get the minEle from it.(minEle-Original)
+Here if the  stack has only 1 element then we perform pop only once ie.  2.2 was not done.
+
+Solution:
+class GfG{
+    int minEle;
+    Stack<Integer> s = new Stack<>();
+
+    /*returns min element from stack*/
+    int getMin()
+    {
+    	if(s.empty())
+    	    return -1;
+    	return minEle;
+    }
+    
+    /*returns poped element from stack*/
+    int pop()
+    {
+    	if(s.empty())
+    	    return -1;
+    	int x = s.pop();
+    	if(!s.empty())
+    	    minEle = s.pop()-x;
+    	return x;
+    }
+
+    /*push element x into the stack*/
+    void push(int x)
+    {
+    	if(s.empty()){
+    	    s.push(x);
+    	    minEle = x;
+    	}
+    	else{
+    	   s.push(minEle+x);
+    	   s.push(x);
+    	}
+    	    
+    	minEle = Math.min(minEle,x);
+    }	
+}
