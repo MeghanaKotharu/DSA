@@ -43,7 +43,7 @@ Instead we need to create an another pointer pointing to head an move it further
         2.You need to update previous only when condition is not satisfied.
         
  See second approach.
-[Remove elements in LL](https://github.com/meghanak994/DSA/edit/main/DataStructures/LinkedList/Easy/5.Remove%20elements%20in%20ll)
+[Remove elements in LL](https://github.com/MeghanaKotharu/DSA/blob/main/DataStructures/LinkedList/Easy/05.%20Remove%20elements%20in%20ll)
 
 9.When you want to **access the adjacent elements to head(say 2) and remove both of them.**
 you can increment head only once when the condition is not satisfied
