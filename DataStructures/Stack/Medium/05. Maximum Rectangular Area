@@ -1,0 +1,52 @@
+https://practice.geeksforgeeks.org/problems/maximum-rectangular-area-in-a-histogram-1587115620/1/?page=2&category[]=Stack&sortBy=submissions#
+
+
+Find the largest rectangular area possible in a given histogram where the largest rectangle can be made of a number of contiguous bars.
+For simplicity, assume that all bars have the same width and the width is 1 unit, there will be N bars height of each bar will be given 
+by the array arr.
+
+Example 1:
+
+Input:
+N = 7
+arr[] = {6,2,5,4,5,1,6}
+Output: 12
+
+Approach: tc: O(3* n)=O(n)  sc:O(n)
+We need to find the next greater element on left and right for every element.
+then find the area by multiplying the curr ele with the diff of ngr and ngl 
+we take the maximum area and return it atlast
+
+
+Solution:
+class Solution
+{
+    public static long getMaxArea(long hist[], long n) 
+    {
+        long nextright[] =new long[hist.length],nextleft[] =new long[hist.length];
+        long area=0,temp,width;
+        Stack <Long> s=new Stack<>();
+        
+        for(int i=0;i<n;i++){
+            while(!s.empty() && hist[s.peek().intValue()]>=hist[i])
+                s.pop();
+            nextleft[i]=(s.empty()) ? (-1):(s.peek());
+            s.push(Long.valueOf(i));
+        }
+
+        s.clear();
+        for(int i=hist.length-1;i>=0;i--){
+            while(!s.empty() && hist[s.peek().intValue()]>=hist[i])
+                s.pop();
+            nextright[i]=(s.empty()) ?(n): (s.peek());
+            s.push(Long.valueOf(i));
+        }
+
+        for(int i=0;i<n;i++){
+          temp=hist[i]*(nextright[i]-nextleft[i]-1);
+           area=Math.max(area,temp);
+        }
+        return area; 
+    }
+     
+}
