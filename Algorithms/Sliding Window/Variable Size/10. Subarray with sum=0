@@ -1,0 +1,47 @@
+https://practice.geeksforgeeks.org/problems/subarray-with-0-sum-1587115621/1#
+
+Given an array of positive and negative numbers. Find if there is a subarray (of size at-least one) with 0 sum.
+
+Example 1:
+Input:
+5
+4 2 -3 1 6
+
+Output: 
+Yes
+
+Explanation: 
+2, -3, 1 is the subarray  with sum 0.
+
+Example 2:
+Input:
+5
+4 2 0 1 6
+
+Output: 
+Yes
+
+Explanation: 
+0 is one of the element in the array so there exist a subarray with sum 0.
+
+
+Solution:
+class Solution{
+    static boolean findsum(int arr[],int n){
+        //Your code here
+        int j=0,currsum=0,key=0;
+        if(Arrays.stream(arr).anyMatch(i -> i == key)) return true;
+        
+        //if(org.apache.commons.lang3.ArrayUtils.contains(arr,i)) return true;
+        // if(Arrays.asList(arr).contains("0")) return true;
+        
+        HashSet<Integer> a=new HashSet<>();
+        while(j<n){
+            currsum+=arr[j];
+            if(currsum==0 || a.contains(currsum)) return true;  
+            a.add(currsum);
+            j++;
+        }
+        return false;
+    }
+}
