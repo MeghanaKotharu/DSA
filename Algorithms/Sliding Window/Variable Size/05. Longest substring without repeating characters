@@ -1,0 +1,63 @@
+https://leetcode.com/problems/longest-substring-without-repeating-characters/
+
+Given a string s, find the length of the longest substring without repeating characters.
+
+ 
+
+Example 1:
+
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+Example 2:
+
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+Example 3:
+
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+
+Approach:
+1.Add element one by one and increment j.
+2.No of unique characters should be equal to j-i+1 as that is the size of window and all characters in the window should be unique. When it is true store substring size based on which one is larger.
+3.Else remove elements from string until its true.
+ 
+ 
+Solution:    tc:O(n)   sc:O(n)
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        HashMap<Character,Integer> m=new HashMap<>();
+        int i=0,j=0,maxlen=0;
+        while(j<s.length()){
+            
+            char c=s.charAt(j);
+            if(m.containsKey(c))
+               m.put(c,m.get(c)+1);
+            else
+               m.put(c,1);
+           // m.put(c,m.getOrDefault(c,0)+1);  
+               
+
+            if(m.size()<(j-i+1)){
+                while(m.size()<(j-i+1)){
+                    char ck=s.charAt(i);
+                    if(m.get(ck)==1)
+                       m.remove(ck);
+                    else
+                        m.put(ck,m.get(ck)-1);
+                    i++;
+                }
+            }
+            if(m.size()==(j-i+1))
+                maxlen=((j-i+1)>maxlen)?(j-i+1):(maxlen);
+                
+            j++;
+        }
+        return maxlen;
+    }
+    
+}
