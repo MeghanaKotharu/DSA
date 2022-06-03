@@ -1,0 +1,60 @@
+https://practice.geeksforgeeks.org/problems/smallest-window-in-a-string-containing-all-the-characters-of-another-string-1587115621/1/?page=1&status%5b%5d=solved&category%5b%5d=sliding-window&sortBy=submissions
+
+Given two strings S and P. Find the smallest window in the string S consisting of all the characters(including duplicates) of the string P.  Return "-1" in case there is no such window present. In case there are multiple such windows of same length, return the one with the least starting index. 
+
+Example 1:
+
+Input:
+S = "timetopractice"
+P = "toc"
+
+Output: 
+toprac
+
+Explanation: "toprac" is the smallest substring in which "toc" can be found.
+
+Approach:
+Same as variable sliding window moto
+
+Solution:
+class Solution{
+    public static String smallestWindow(String str, String p){
+       // Step 1 Make HM for String t        
+        HashMap<Character,Integer> hm=new HashMap<>();
+        
+        for(int i=0;i<p.length();i++){
+            char ch=p.charAt(i);
+            hm.put(ch,hm.getOrDefault(ch,0)+1);
+        }
+        
+        int count=hm.size();
+        // Step 2 Variable Sliding window Starts
+        int s=0,e=0;
+        int ans=Integer.MAX_VALUE,as=0,ae=0;
+        int n=str.length();
+        
+        while(e<n){
+            char ch=str.charAt(e);
+            if(hm.containsKey(ch)){
+                hm.put(ch,hm.get(ch)-1);
+                if(hm.get(ch)==0) count--;
+            }
+            while(count==0){
+                if((e-s+1)<ans){
+                    ans=e-s+1;
+                    as=s;
+                    ae=e;
+                }
+                ch=str.charAt(s);
+                if(hm.containsKey(ch)){
+                    hm.put(ch,hm.get(ch)+1);
+                    if(hm.get(ch)>0) count++;
+                }
+                s++;
+            }
+            e++;
+        }
+        if(as==ae && s==0) return "-1";
+        return str.substring(as,ae+1);
+    }
+}
