@@ -1,13 +1,16 @@
 **Approach of a Variable Size SW**
 Variable size sliding window motto
 
-
              1.First of all add elements according to condition.
              2.Check if condition is true if yes store solution
              3.Try to achieve one solution first then optimize it by incrementing I slowly once condition is  false then exit loop
                    (store optimal answer before exiting)             
             4.If condition is false in step3 keep on incrementing j again and repeat from step2.
-Incase before having optimal solution if string reached end then later with an another loop find optimal solution
+            
+1.Try to achieve one solution first then optimize it by incrementing I slowly condition will be false once then exit loop(store optimal answer before exiting) and again keep on incrementing j
+   
+   
+2.Incase before having optimal solution if string reached end then later with an another loop find optimal solution
 [Like this](https://practice.geeksforgeeks.org/problems/smallest-distant-window3132/1/?page=1&category[]=sliding-window&sortBy=submissions#)
 
 
