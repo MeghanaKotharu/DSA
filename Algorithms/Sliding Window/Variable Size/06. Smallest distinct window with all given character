@@ -1,0 +1,87 @@
+https://practice.geeksforgeeks.org/problems/smallest-distant-window3132/1/?page=1&category%5b%5d=sliding-window&sortBy=submissions#
+
+Smallest distinct window 
+Medium Accuracy: 50.29% Submissions: 22554 Points: 4
+Given a string 's'. The task is to find the smallest window length that contains all the characters of the given string at least one time.
+For eg. A = aabcbcdbca, then the result would be 4 as of the smallest window will be dbca.
+
+ 
+
+Example 1:
+Input : "AABBBCBBAC"
+Output : 3
+Explanation : Sub-string -> "BAC"
+
+Example 2:
+Input : "aaab"
+Output : 2
+Explanation : Sub-string -> "ab"
+ 
+Example 3:
+Input : "GEEKSGEEKSFOR"
+Output : 8
+Explanation : Sub-string -> "GEEKSFOR"
+
+Note:
+Try to achieve one solution first then optimize it by incrementing I slowly condition 
+will be false once then exit loop(store optimal answer before exiting) and again keep 
+ on incrementing j
+ 
+ 
+Approach:tc:O(2*n)=O(n)  sc:O(2*n)=O(n)
+1.Add element one by one and increment j.
+2.No of characters should be equal to unique characters available in string When it is true store substring size based on which one is smaller.
+3.Remove elements from string until its condition will be false.
+
+Solution:
+class Solution {
+    public String findSubString( String str) {
+
+        int j=0,i=0,ans=Integer.MAX_VALUE,count=0;
+        String finalans="a";
+        HashMap<Character,Integer> hm=new HashMap<>();
+        Set<Character> s=new HashSet<Character>();
+        
+        for(int k=0;k<str.length();k++){
+            s.add(str.charAt(k));
+        }
+        
+        while(i<=j && j<str.length()){            
+            if(hm.containsKey(str.charAt(j))) 
+                  hm.put(str.charAt(j),hm.get(str.charAt(j))+1);
+            else{
+                hm.put(str.charAt(j),1);
+                count++;
+            }
+            
+            if(count==s.size() ){
+                ans=(ans>(j-i+1))?(j-i+1):(ans);
+            }
+            
+            while(count==s.size()){
+                char ch=str.charAt(i);
+                if(hm.get(ch)==1){
+                   ans=(ans>(j-i+1))?(j-i+1):(ans);
+                   hm.remove(ch);
+                   count--;
+                }
+                else hm.put(ch,hm.get(ch)-1);
+                i++;
+            }
+            j++;
+        }
+         while(count==s.size()){
+                char ch=str.charAt(i);
+                if(hm.get(ch)==1){
+                   ans=(ans>(j-i+1))?(j-i+1):(ans);
+                   count--;
+                }
+                else hm.put(ch,hm.get(ch)-1);
+                i++;
+         }
+         
+        if(ans==Integer.MAX_VALUE || ans<0) return "";
+        return finalans.repeat(ans);
+    }
+}
+
