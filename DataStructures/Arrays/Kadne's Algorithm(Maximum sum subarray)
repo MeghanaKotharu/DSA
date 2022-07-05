@@ -1,0 +1,35 @@
+https://practice.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1/?problemStatus=solved&page=1&query=problemStatussolvedpage1
+
+Given an array Arr[] of N integers. Find the contiguous sub-array(containing at least one number) which has the maximum sum and return its sum.
+
+Example 1:
+
+Input:
+N = 5
+Arr[] = {1,2,3,-2,5}
+Output:
+9
+
+Explanation:
+Max subarray sum is 9 of elements (1, 2, 3, -2, 5)
+
+Approach:  tc:O(n) sc:O(1)
+1. We add the elements one by one and if max sum is stored in every stage in another variable named m.
+2.return m finally 
+
+Solution:
+class Solution{
+    long long maxSubarraySum(int arr[], int n){
+      long long min = INT_MIN, m = min, sum = 0;       
+       int i;    
+       for(i=0; i<n; i++){
+           sum = sum + arr[i];
+           
+           if(sum >= m)
+               m = sum;    
+           if(sum < 0)
+               sum = 0;
+       }       
+       return m;   
+    }
+};
