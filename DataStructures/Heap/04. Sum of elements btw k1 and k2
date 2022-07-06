@@ -1,0 +1,47 @@
+https://practice.geeksforgeeks.org/problems/sum-of-elements-between-k1th-and-k2th-smallest-elements3133/1/?page=1&category[]=Heap&sortBy=submissions#
+
+Given an array A[] of N positive integers and two positive integers K1 and K2. 
+Find the sum of all elements between K1th and K2th smallest elements of the array. 
+It may be assumed that (1 <= k1 < k2 <= n).
+
+Example 1:
+Input:
+N  = 7
+A[] = {20, 8, 22, 4, 12, 10, 14}
+K1 = 3, K2 = 6
+Output:
+26
+
+Explanation:
+3rd smallest element is 10
+6th smallest element is 20
+Element between 10 and 20 are 12,14. Their sum = 26.
+
+Approach: tc:O(nlogk2) sc:O(n)
+1. First we need to find the k1th smallest element k2th smallest element in the array (3rd and 6th form given example)
+2. add them to max heap to get smallest element and find the (3rd and 6th smallest given ex).
+3. now iterate through array and find the elements btw those 2 elements add their sum and return it.
+
+Solution:
+class Solution { 
+    public static long sumBetweenTwoKth(long A[], long N, long K1, long K2)
+    {
+        // Your code goes here
+        PriorityQueue <Long> maxheap=new PriorityQueue<>(Collections.reverseOrder());
+        long first,second,sum=0,t;
+        for(int i=0;i<N;i++){
+            maxheap.add(A[i]);
+            if(maxheap.size()>K2)   maxheap.poll();
+        }
+        
+        second=maxheap.poll();
+        while(maxheap.size()>K1)    maxheap.poll();
+        first=maxheap.poll();
+        
+        for(int i=0;i<N;i++){
+            if(A[i]>first && A[i]<second)
+                sum+=A[i];
+        }
+        return sum;
+    }
+}
