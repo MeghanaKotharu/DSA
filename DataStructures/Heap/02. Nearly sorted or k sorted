@@ -14,6 +14,8 @@ Explanation: The sorted array will be
 2 3 5 6 8 9 10
 
 Approach:
+The element may be present in the k+1 or before the k+1 elements
+
 1.As in the qn it was given that the element is k away from it's position 
      we need to add k elements in to heap the minimum element will be at top of minheap
 2.Just pop it and add it into result array.
