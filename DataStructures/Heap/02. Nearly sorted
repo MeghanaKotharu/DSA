@@ -1,0 +1,43 @@
+https://practice.geeksforgeeks.org/problems/nearly-sorted-1587115620/1/?page=1&category[]=Heap&sortBy=submissions#
+
+Given an array of n elements, where each element is at most k away from its target position, you need to sort the array optimally.
+
+Example 1:
+
+Input:
+n = 7, k = 3
+arr[] = {6,5,3,2,8,10,9}
+
+Output: 2 3 5 6 8 9 10
+
+Explanation: The sorted array will be
+2 3 5 6 8 9 10
+
+Approach:
+1.As in the qn it was given that the element is k away from it's position 
+     we need to add k elements in to heap the minimum element will be at top of minheap
+2.Just pop it and add it into result array.
+   Thus the array will be in a sorted position finally.
+
+Solution: tc:O(nlogk)  sc:O(n)
+
+class Solution
+{
+    //Function to return the sorted array.
+    ArrayList <Integer> nearlySorted(int arr[], int num, int k)
+    {
+        // your code here
+        PriorityQueue <Integer> minheap=new PriorityQueue<>();
+        ArrayList<Integer> a=new ArrayList<Integer>();
+        
+        for(int i=0;i<arr.length;i++){
+            minheap.add(arr[i]);
+            if(minheap.size()>k)   a.add(minheap.poll());
+        }
+        
+        Iterator it=minheap.iterator();
+        while(it.hasNext())
+            a.add(minheap.poll());
+        return a;
+    }
+}
