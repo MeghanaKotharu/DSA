@@ -1,0 +1,49 @@
+https://practice.geeksforgeeks.org/problems/k-largest-elements4206/1/?page=1&category[]=Heap&sortBy=submissions#
+
+Given an array Arr of N positive integers, find K largest elements from the array.  The output elements should be printed in decreasing order.
+
+Example 1:
+
+Input:
+N = 5, K = 2
+Arr[] = {12, 5, 787, 1, 23}
+
+Output: 787 23
+Explanation: 1st largest element in the array is 787 and second largest is 23.
+
+Approach:
+First read basic min heap and max heap description in readme
+1. we add elements one by one to the min heap and when size >k remove the top smallest element
+2. In this way we add all elements and remove elements at top.
+3. Finally we are left with the top largest k elements.
+4. Poll them and print.
+
+
+Solution: tc:O(nlogk) sc:O(k)
+class Solution {
+    int[] kLargest(int[] arr, int n, int k) {
+        // code here
+        PriorityQueue <Integer> minheap=new PriorityQueue<>();
+        for(int i=0;i<n;i++){
+            minheap.add(arr[i]);
+            if(minheap.size()>k)  minheap.poll();
+        }
+        int []a=new int[minheap.size()];
+        for(int i=0;i<k;i++){
+           a[i]=minheap.peek();
+           minheap.poll();
+        } 
+        
+        /*actually the below part increase complexity but needed bez in qn it is mentioned 
+        the output should be in decreasing order*/
+     //   Arrays.sort(a,Collections.reverseOrder()); ---> works only for non primitive
+        //ArrayUtils.reverse(a);
+        
+        
+       a = Arrays.stream(a).boxed()
+    .sorted(Collections.reverseOrder())       //works for primitive array reverse sort
+    .mapToInt(Integer::intValue)
+    .toArray();
+        return a;
+    }
+}
