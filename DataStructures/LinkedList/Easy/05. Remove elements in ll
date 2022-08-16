@@ -27,7 +27,7 @@ Note: I used a while loop at 38 line bez if 2->6->6->4 comes then  //or you can 
        2->4           curr=2  next=4
 
 
-Solution: tc:O()   sc-O(1)
+Solution: tc:O(n)   sc-O(1)
 class Solution {
     public ListNode removeElements(ListNode head, int val) {
         ListNode temp=head,prev=head;
@@ -70,5 +70,5 @@ public class Solution {
     }
 }
 
-Approach 3: tc:O()   sc-O(n)
+Approach 3: tc:O(n)   sc-O(n)
 1.Create a new LL and all elements from head to new LL except val nodes.
